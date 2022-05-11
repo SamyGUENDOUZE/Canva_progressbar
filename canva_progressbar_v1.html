@@ -1,0 +1,125 @@
+<!--
+    Erreurs à corriger : 
+    1) Centrer les éléments et faire le programme en responsive
+    2) Mettre une barre vide par défaut avant de : (voir en-dessous)
+    3) Lancer les bulles et le linear-gradient seulement au clic du bouton (et non pas, par défaut comme on peut le voir)
+-->
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canva progress bar</title>
+
+    <style>
+        html {
+            background-color: rgb(22, 22, 178);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .progress-bar {
+            height: 15px;
+            background: linear-gradient(90deg, #5bbfd3, #3da2d6, #2d81de, #507ae4, #4062e6, #ac80f0, #825fe8 );
+            box-shadow: 0 0 5px blue;
+            border-radius: 20px;
+            overflow : hidden;
+            position: relative;
+        }
+        .progress-bar > .bubbles {
+            width: 100%;
+            height: 100%;
+            transform: translateX(100%);
+            animation: fill 5s ease-out forwards;
+        }
+        .progress-bar > .bubbles > .bubble {
+            background-color: transparent;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            box-shadow: 0 0 3px whitesmoke;
+            transform: translateY(-5px);
+            position: fixed;
+            animation: float 5s linear infinite;
+        }
+        button {
+    margin-left: 450px;
+    margin-top: 200px;
+    width : 200px;
+    height : 50px;
+    background-image: linear-gradient(90deg, #5bbfd3, #3da2d6, #2d81de, #507ae4, #4062e6, #ac80f0, #825fe8 );
+    border-radius: 16px;
+    border:#4062e6 solid ;
+    font-size: larger;
+    color: white;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+        @keyframes fill {
+            from {
+                transform: translateY(100%);
+            }  to {
+                transform: translateY(0);
+            }
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(-5px);
+            }  50% {
+                transform: translateY(15px);
+            }  100% {
+                transform: translateY(-5px);
+            }
+        }
+
+        #play-animation {
+    animation: progress-animation 5s forwards;
+}
+
+@keyframes progress-animation {
+    0% {width: 0%;}
+    100% {width: 100%;}
+}
+    </style>
+
+    <script>
+        function createBubbles(bubblesNumber, pourcent) {
+            for(let i = 0; i < bubblesNumber; i++) {
+                const randomLeft = Math.floor(Math.random() * (pourcent * 200 / 100));
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                bubble.style.left = randomLeft + 'px';
+                bubble.style.animationDelay = Math.random() * 2 + 's';
+                document.querySelector('.bubbles').appendChild(bubble)
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            createBubbles(100, 700);
+        })
+        /* Déclenchement de l'action lorsque l'on clique dessus */
+        const upload = () => {
+
+        const progressBar = document.querySelector('.progress-bar');
+        progressBar.setAttribute('id', 'play-animation');
+        }
+        /* Déclenchement de l'action lorsque l'on clique dessus */
+    </script>
+
+</head>
+<body>
+    <div class = "progress-bar">
+        <div class = "bubbles">
+            <div class = "bubble"></div>
+        </div>
+    </div>
+    <button onclick="upload()">Test:)</button>
+</body>
+</html>#Canva_progressbar
